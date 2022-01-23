@@ -1,25 +1,37 @@
 import javax.swing.JOptionPane;
+
 public class enteroPositivoAPP {
 
 	public static void main(String[] args) {
-		int numero=0;
-		do {
-			String texto=JOptionPane.showInputDialog("Introdice un numero positivo");
-			numero=Integer.parseInt(texto);
-		} while(numero<0);
-		int numCifras=cuentaCifras(numero);
-		//Controlamos el numero de cifras
-		if (numCifras==1) {
-			System.out.println("El numero "+numero+" tiene "+numCifras+" cifra");
-		}else {
-			System.out.println("El numero "+numero+" tiene "+numCifras+" cifras");
+
+		// pedir numero por teclado
+		String text = JOptionPane.showInputDialog("Escribe un numero");
+		// BLOQUE POR SI EL CODIGO PETA, VA AL CATCH
+		try {
+			int number = Integer.parseInt(text);
+			// controlar el num pedido es positivo
+			if (number >= 0) {
+				int digitos = numCifras(number);
+				if (digitos == 1) {
+					System.out.println("El número " + text + " tiene " + digitos + " dígito");
+				} else {
+					System.out.println("El número " + text + " tiene " + digitos + " dígitos");
+				}
+
+			} else {
+				System.out.println("Posa número positiu, cabró");
+			}
+		} catch (Exception e) {
+			System.out.println("No és un número válido");
+			e.printStackTrace(); // PINTA EL ERROR
 		}
+
 	}
-	public static int cuentaCifras (int numero) {
-		int contador=0;
-		for (int i=numero;i>0;i/=10) {
-			contador++;
-		}
-		return contador;
+
+	public static int numCifras(int number) {
+		String word = String.valueOf(number);
+		int longitud = word.length();
+		return longitud;
 	}
+
 }
